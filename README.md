@@ -1,1 +1,3 @@
 # Tic-Tac-Toe
+
+This is a TIC TAC TOE GAME USING AI AND PYTHON.
