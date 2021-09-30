@@ -36,7 +36,7 @@ def check_win(player_pos, cur_player):
  
     # Loop to check if any winning combination is satisfied
     for x in soln:
-        if all(y in player_pos[cur_player] for y in x):
+        if all(y in player_pos[player_choice[cur_player]] for y in x):
  
             # Return True if any winning combination satisfies
             return True
@@ -83,10 +83,10 @@ def single_game(cur_player):
         # Update game information
  
         # Updating grid status 
-        values[move-1] = cur_player
+        values[move-1] = player_choice[cur_player]
  
         # Updating player positions
-        player_pos[cur_player].append(move)
+        player_pos[player_choice[cur_player]].append(move)
  
         # Function call for checking win
         if check_win(player_pos, cur_player):
@@ -103,10 +103,10 @@ def single_game(cur_player):
             return 'D'
  
         # Switch player moves
-        if cur_player == 'X':
-            cur_player = 'O'
+        if cur_player == player1:
+            cur_player = player2
         else:
-            cur_player = 'X'
+            cur_player = player1
  
 if __name__ == "__main__":
  
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     cur_player = player1
  
     # Stores the choice of players
-    player_choice = {'X' : "", 'O' : ""}
+    player_choice = {}
  
     # Stores the options
     options = ['X', 'O']
@@ -147,31 +147,36 @@ if __name__ == "__main__":
         except ValueError:
             print("Wrong Input!!! Try Again\n")
             continue
- 
+        if choice <1 or choice >3:
+            print("Wrong Input!!! Try Again\n")
+            continue
+
         # Conditions for player choice  
         if choice == 1:
-            player_choice['X'] = cur_player
+            player_choice[cur_player] = 'X'
             if cur_player == player1:
-                player_choice['O'] = player2
+                player_choice[player2] = 'O'
             else:
-                player_choice['O'] = player1
+                player_choice[player1] = 'O'
+            
  
         elif choice == 2:
-            player_choice['O'] = cur_player
+            player_choice[cur_player] = 'O'
             if cur_player == player1:
-                player_choice['X'] = player2
+                player_choice[player2] = 'X'
             else:
-                player_choice['X'] = player1
+                player_choice[player1] = 'X'
+            
          
         elif choice == 3:
             print("Final Scores")
             print_scoreboard(score_board)
             break  
  
-        else:
-            print("Wrong Choice!!!! Try Again\n")
- 
-        
+        winner = single_game(cur_player)
+        if winner != "D":
+            score_board[winner] += 1
+
  
         print_scoreboard(score_board)
         # Switch player who chooses X or O
