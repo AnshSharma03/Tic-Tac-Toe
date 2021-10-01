@@ -171,7 +171,13 @@ if __name__ == "__main__":
         else:
             print("Wrong Choice!!!! Try Again\n")
  
-        
+        # Stores the winner in a single game of Tic Tac Toe
+        winner = single_game(options[choice-1])
+         
+        # Edits the scoreboard according to the winner
+        if winner != 'D' :
+            player_won = player_choice[winner]
+            score_board[player_won] = score_board[player_won] + 1
  
         print_scoreboard(score_board)
         # Switch player who chooses X or O
