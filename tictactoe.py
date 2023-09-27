@@ -16,10 +16,9 @@ def print_tic_tac_toe(values):
     print("\n")
  
  
-# Function to print the score-board
 def print_scoreboard(score_board):
     print("\t--------------------------------")
-    print("\t              SCOREBOARD       ")
+    print("\t              SCOREBOARD hi       ")
     print("\t--------------------------------")
  
     players = list(score_board.keys())
